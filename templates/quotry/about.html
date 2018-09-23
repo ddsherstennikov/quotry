@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}About{% endblock %}
+
+{% block body_block %}
+    <div class="page-header">
+      <h1>Sorry <b>about</b> the mess</h1>
+    </div>
+
+    <div class="container-fluid">
+      <img src="{% static "images/about.jpg" %}" alt="Han Solo in Cantina" class="img-rounded">
+    </div>
+
+    <hr>
+
+    <!-- refs, grats, contacts, message -->
+    <div class="container-fluid">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Feedback</h2>
+        </div>
+        <div class="panel-body">
+          <a href="mailto:feedback@quotry.com">feedback@quotry.com</a>
+        </div>
+      </div>
+
+    </div><!-- /.jumbotron -->
+{% endblock body_block %}

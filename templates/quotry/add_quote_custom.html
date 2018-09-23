@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% load quotry_extras %}
+
+{% block title %}Add Quote{% endblock %}
+
+{% block body_block %}
+
+<!--
+
+<form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputFile">File input</label>
+    <input type="file" id="exampleInputFile">
+    <p class="help-block">Example block-level help text here.</p>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Check me out
+    </label>
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+-->
+
+  <form role="form" id="quote_form" method="post" action="{% url 'add_quote_custom' %}">
+    {% csrf_token %}
+
+    <div class="page-header">
+      <h2 class="form-signin-heading">Add a Quote</h2>
+    </div>
+
+    <!-- select Tag control -->
+    <div class="form-group">
+      <label for="selected_tag">Tag</label><br>
+
+      <div class="input-group">
+
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            Choose Tag <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            {% for t in tags %}
+               <li><a href="#">{{t.name}}</a></li>
+            {% endfor %}
+          </ul>
+        </div><!-- /.input-group-btn -->
+
+        <input type="text" class="form-control input-select" id="selected_tag" name="selected_tag" aria-label="selected_tag" />
+
+      </div><!-- /.input-group -->
+    </div><!-- /.form-group -->
+
+
+
+
+    <!--{% comment %}
+
+    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
+      Choose a Tag <span class="caret"></span>
+    </a>
+
+
+    <!-- button-dropdown with input field -->
+    <div class="form-group">
+      <label for="selected_tag">Tag</label>
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            Choose Tag <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            {% for t in tags %}
+               <li><a href="#">{{t.name}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <input id="selected_tag" name="selected_tag" type="text" class="form-control" aria-label="...">
+      </div>
+
+    {% endcomment %}-->
+
+    {% for hidden in form.hidden_fields %}
+      {{ hidden }}
+    {% endfor %}
+
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input id="title" name="title" type="text" class="form-control" aria-label="title" />
+    </div>
+    <div class="form-group">
+      <label for="author">Author</label>
+      <input id="author" name="author" type="text" class="form-control" aria-label="author" />
+    </div>
+    <div class="form-group">
+      <label for="text">Quotation Text</label>
+      <textarea id="text" name="text" type="text" class="form-control" placeholder="enter the quote..." aria-label="text"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="url">Addon URL (optional)</label>
+      <input id="url" name="url" type="url" class="form-control" aria-label="url" />
+    </div>
+
+    <!--{% comment %}
+    {% for field in form.visible_fields %}
+      {{ field.errors }}
+      {{ field.help_text }}<br/>
+      {{ field }}<br/>
+    {% endfor %}
+    {% endcomment %}-->
+
+    <br>
+
+    <button class="btn btn-primary" type="submit" name="submit">Add Quote</button>
+  </form>
+
+{% endblock body_block %}

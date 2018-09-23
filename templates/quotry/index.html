@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Index{% endblock %}
+
+{% block body_block %}
+
+    <link href="{% static "css/examples/jumbotron-narrow.css" %}" rel="stylesheet">
+
+    <!-- big title jumbo -->
+    <div class="jumbotron">
+      {% if user.is_authenticated %}
+        <h1 style="color:#228b22; font-family: FontAwesome; font-weight: bold">quotrY</h1>
+        <h2 style="color:#585858">Welcome, {{ user.username }}.</h2>
+        <!-- visits counter -->
+        {% block counter %}
+          {% if user.is_authenticated %}
+            <h3 style="color:#727272">visits: {{ visits }}</h3>
+          {% endif %}
+        {% endblock counter %}
+      {% else %}
+        <h1 style="color: #228b22; font-family: FontAwesome; font-weight: bold;">quotrY</h1><br>
+        <h2 style="font-family: FontAwesome;">quotes <small>that</small> are <small>part of</small> You</h2><br>
+        <h3>
+          <span style="background-color: #bdefbd; border-color: transparent;" class="label">Surf</span>
+          <span style="background-color: #7cdf7c; border-color: transparent;" class="label">Share</span>
+          <span style="background-color: #3acf3a; border-color: transparent;" class="label">Assemble</span>
+          <span style="background-color: #228b22; border-color: transparent;" class="label">Save</span>
+        </h3>
+      {% endif %}
+    </div>
+
+    {% if user.is_authenticated %}
+      <!-- Quotes and Tags top5 lists -->
+      <div class="row placeholders">
+        <!-- Tags list -->
+        <div class="col-xs-12 col-sm-6 placeholder">
+          <!-- Tags list header -->
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                  <h2 class="panel-title">Tags</h2>
+              </div>
+          </div>
+          <!-- Tags list body -->
+          {% if tags %}
+              <ul class="list-group">
+                  {% for tag in tags %}
+                  <li class="list-group-item"><a href="{% url 'tag' tag.slug %}">{{ tag.name }}</a></li>
+                  {% endfor %}
+              </ul>
+          {% else %}
+              <strong>There are no tags present.</strong>
+          {% endif %}
+        </div>
+        <!-- Quotes list -->
+        <div class="col-xs-12 col-sm-6 placeholder">
+          <!-- Quotes list header -->
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                  <h2 class="panel-title">Quotes</h2>
+              </div>
+          </div>
+          <!-- Quotes list body -->
+          {% if quotes %}
+              <ul class="list-group">
+                  {% for quote in quotes %}
+                  <li class="list-group-item">{{ quote.title }}</li>
+                  {% endfor %}
+              </ul>
+          {% else %}
+              <strong>There are no quotes present.</strong>
+          {% endif %}
+        </div>
+      </div>
+    
+    {% else %}
+      <!-- landing block -->
+      <br>
+      <div class="container-fluid" style="text-align: center">
+        <h1 style="color:#585858">Under construction.</h1>
+        <h2 style="color:#585858">Coming when ready. j-D</h2><br>
+        <a href="{% url 'auth_login' %}" class="btn btn-danger btn-lg">I have an invite</a>
+      </div>
+    {% endif %}
+    
+    
+
+{% endblock body_block %}

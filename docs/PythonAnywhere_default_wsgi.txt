@@ -1,0 +1,82 @@
+# This file contains the WSGI configuration required to serve up your
+# web application at http://www.quotry.com/
+# It works by setting the variable 'application' to a WSGI handler of some
+# description.
+#
+# Below are templates for Django and Flask.  You should update the file
+# appropriately for the web framework you're using, and then
+# click the 'Reload /yourdomain.com/' button on the 'Web' tab to make your site
+# live.
+
+# +++++++++++ VIRTUALENV +++++++++++
+# If you're using a virtualenv, you should activate it at the top of your
+# wsgi file, using code like this:
+#
+#activate_this_path = '/home/sdd/path/to/my-virtualenv/bin/activate_this.py'
+#with open(activate_this_path) as f:
+#    code = compile(f.read(), activate_this_path, 'exec')
+#exec(code, dict(__file__=activate_this_path))
+
+
+
+# +++++++++++ CUSTOM WSGI +++++++++++
+# If you have a WSGI file that you want to serve using PythonAnywhere, perhaps
+# in your home directory under version control, then use something like this:
+#
+#import os
+#import sys
+#
+#path = '/home/sdd/path/to/my/app
+#if path not in sys.path:
+#    sys.path.append(path)
+#
+#from my_wsgi_file import application
+
+
+# +++++++++++ DJANGO +++++++++++
+# To use your own django app use code like this:
+#import os
+#import sys
+#
+## assuming your django settings file is at '/home/sdd/mysite/settings.py'
+#path = '/home/sdd'
+#if path not in sys.path:
+#    sys.path.append(path)
+#
+#os.environ['DJANGO_SETTINGS_MODULE'] = 'mysite.settings'
+#
+#import django.core.handlers.wsgi
+#application = django.core.handlers.wsgi.WSGIHandler()
+
+
+# +++++++++++ FLASK +++++++++++
+# Here is a simple Flask app. It is currently serving the default welcome
+# page.  You can adapt this if you want.
+#
+# If you're using a different web framework, you'll need to comment all of this
+# out
+
+from flask import Flask
+
+application = Flask(__name__)
+
+@application.route('/')
+def hello_world():
+    return """
+            <html>
+            <head>
+                <title>Python Anywhere hosted web application</title>
+            </head>
+            <body>
+            <h1>Hello, World!</h1>
+            <p>
+                This is the default welcome page for a
+                <a href="https://www.pythonanywhere.com/">PythonAnywhere</a>
+                hosted web application.
+            </p>
+            <p>
+                Find out more about how to configure your own web application
+                by visiting the <a href="https://www.pythonanywhere.com/web_app_setup/">web app setup</a> page
+            </p>
+            </body>
+            </html>"""

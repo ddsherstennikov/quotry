@@ -1,0 +1,16 @@
+{% if tags %}
+<ul class="nav nav-sidebar">
+  {% for t in tags %}
+    {% if t == act_tag %} 
+  <li  class="active" > 
+    {% else  %} 
+  <li>
+    {% endif %}
+    <a href="{% url 'tag' t.slug %}">{{ t.name }}</a>
+  </li>
+  {% endfor %}
+
+{% else %}
+  <li> <strong >There are no tags present.</strong></li>
+</ul>
+{% endif %}

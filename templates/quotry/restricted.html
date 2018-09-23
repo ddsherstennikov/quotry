@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Restricted{% endblock %}
+
+{% block body_block %}
+    <div class="page-header">
+        <h1>This is Very Restricted Page.</h1>
+    </div>
+
+    <p>Move along! j-D</p>
+
+    <hr />
+
+    <img src="{% static "images/restricted.jpg" %}" alt="Stormtroopers at Mos Eisley Entrance" /><br />
+
+{% endblock body_block %}

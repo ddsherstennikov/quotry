@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body_block %}
+    <div class="page-header">
+        <h1>{{user.username}}'s Profile</h1>
+    </div>
+
+    <form id="user_form" method="post" action="{% url 'profile' %}"
+            enctype="multipart/form-data">
+        {% csrf_token %}
+
+
+        <!--
+        email = forms.EmailField(widget=forms.EmailInput(), required=False)
+        -->
+        {{ user_form.as_p }}
+
+
+        <!--
+            website = forms.URLField(required=False)
+            picture = forms.ImageField(required=False)
+
+        -->
+        {{ profile_form.as_p }}
+
+        <input type="submit" name="submit" value="Save" />
+    </form>
+
+{% endblock body_block %}
